@@ -94,9 +94,9 @@ public class UserModel {
         this.username = username;
     }
 
-    public String getPassword() {
-        return this.password;
-    }
+    // public String getPassword() {
+    // return this.password;
+    // }
 
     public void setPassword(String password) {
         this.password = password;

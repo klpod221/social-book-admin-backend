@@ -30,8 +30,8 @@ public class UUID_handing {
         return UUID << 19;
     }
 
-    public static void main(String[] args) throws ParseException {
-        Long UUID = UUID_Generator();
-        System.out.println(UUID);
-    }
+    // public static void main(String[] args) throws ParseException {
+    // Long UUID = UUID_Generator();
+    // System.out.println(UUID);
+    // }
 }
