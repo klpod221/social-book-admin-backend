@@ -16,7 +16,7 @@ public class UserCreateRequest {
     private String avatarUrl;
 
     @NotBlank
-    private int isActive;
+    private Integer isActive;
 
     public String getFirstName() {
         return this.firstName;
@@ -58,11 +58,11 @@ public class UserCreateRequest {
         this.avatarUrl = avatarUrl;
     }
 
-    public int getIsActive() {
+    public Integer getIsActive() {
         return this.isActive;
     }
 
-    public void setIsActive(int isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 

@@ -14,6 +14,20 @@ public interface UserAccountRepository extends JpaRepository<UserModel, Long> {
 
     @Query(nativeQuery = true, value = "SELECT * " +
             "FROM users " +
-            "WHERE (CONCAT(first_name, ' ', last_name) like %?1%) OR(id LIKE %?1%) OR (email LIKE %?1%) OR (username LIKE %?1%)")
+            "WHERE (CONCAT(first_name, ' ', last_name) like %?1%) " +
+            "OR (id LIKE %?1%) " +
+            "OR (email LIKE %?1%) " +
+            "OR (username LIKE %?1%)")
     List<UserModel> searchUser(String search);
+
+    @Query(nativeQuery = true, value = "SELECT * " +
+            "FROM users " +
+            "WHERE ((CONCAT(first_name, ' ', last_name) like %?1%) " +
+            "OR (id LIKE %?1%) " +
+            "OR (email LIKE %?1%) " +
+            "OR (username LIKE %?1%)) " +
+            "AND (is_active = ?2)")
+    List<UserModel> searchUserWithStatus(String search, Integer status);
+
+    List<UserModel> findByIsActive(Integer isActive);
 }

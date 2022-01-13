@@ -36,13 +36,13 @@ public class UserModel {
 
     @NotBlank
     @Column(name = "is_active")
-    private int isActive;
+    private Integer isActive;
 
     public UserModel() {
     }
 
     public UserModel(Long id, String firstName, String lastName, String email, String username, String password,
-            String avatarUrl, String createdAt, int isActive) {
+            String avatarUrl, String createdAt, Integer isActive) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -118,11 +118,11 @@ public class UserModel {
         this.createdAt = createdAt;
     }
 
-    public int getIsActive() {
+    public Integer getIsActive() {
         return this.isActive;
     }
 
-    public void setIsActive(int isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 
@@ -166,7 +166,7 @@ public class UserModel {
         return this;
     }
 
-    public UserModel isActive(int isActive) {
+    public UserModel isActive(Integer isActive) {
         setIsActive(isActive);
         return this;
     }

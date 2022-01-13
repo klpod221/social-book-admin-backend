@@ -6,12 +6,12 @@ public class JwtResponse {
     private String name;
     private String username;
     private String email;
-    private int isActive;
+    private Integer isActive;
 
     public JwtResponse() {
     }
 
-    public JwtResponse(String token, Long id, String name, String username, String email, int isActive) {
+    public JwtResponse(String token, Long id, String name, String username, String email, Integer isActive) {
         this.token = token;
         this.id = id;
         this.name = name;
@@ -60,11 +60,11 @@ public class JwtResponse {
         this.email = email;
     }
 
-    public int getIsActive() {
+    public Integer getIsActive() {
         return this.isActive;
     }
 
-    public void setIsActive(int isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 }

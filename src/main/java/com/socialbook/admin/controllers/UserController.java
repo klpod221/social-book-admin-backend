@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/admin/api/app")
 public class UserController {
@@ -43,14 +43,22 @@ public class UserController {
     String defaultPassword = "socialbook";
 
     @GetMapping("/users")
-    public ResponseEntity<List<UserModel>> getAllUser(@RequestParam(required = false) String search) {
+    public ResponseEntity<List<UserModel>> getAllUser(@RequestParam(required = false) String search,
+            @RequestParam(required = false) Integer activeStatus) {
         try {
             List<UserModel> users = new ArrayList<UserModel>();
 
             if (search == null || search.trim().isEmpty())
-                userRepository.findAll().forEach(users::add);
-            else
-                userRepository.searchUser(search).forEach(users::add);
+                if (activeStatus == null)
+                    userRepository.findAll().forEach(users::add);
+                else
+                    userRepository.findByIsActive(activeStatus).forEach(users::add);
+            else {
+                if (activeStatus == null)
+                    userRepository.searchUser(search).forEach(users::add);
+                else
+                    userRepository.searchUserWithStatus(search, activeStatus).forEach(users::add);
+            }
 
             if (users.isEmpty())
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -128,15 +136,19 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/users/set_active_status/{id}")
-    public ResponseEntity<UserModel> setDefaultPassword(@PathVariable("id") Long id,
-            @RequestParam(required = true) int activeStatus) {
+    @PutMapping("/users/change_active_status/{id}")
+    public ResponseEntity<UserModel> changeActiveStatus(@PathVariable("id") Long id) {
 
         Optional<UserModel> user = userRepository.findById(id);
 
         if (user.isPresent()) {
             UserModel _user = user.get();
-            _user.setIsActive(activeStatus);
+
+            if (_user.getIsActive() == 1)
+                _user.setIsActive(0);
+            else
+                _user.setIsActive(1);
+
             return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
         }
 

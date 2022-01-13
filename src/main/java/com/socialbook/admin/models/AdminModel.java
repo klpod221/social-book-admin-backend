@@ -29,12 +29,12 @@ public class AdminModel {
     @Size(max = 120)
     private String password;
 
-    private int isActive;
+    private Integer isActive;
 
     public AdminModel() {
     }
 
-    public AdminModel(Long id, String username, String name, String email, String password, int isActive) {
+    public AdminModel(Long id, String username, String name, String email, String password, Integer isActive) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -83,11 +83,11 @@ public class AdminModel {
         this.password = password;
     }
 
-    public int getIsActive() {
+    public Integer getIsActive() {
         return this.isActive;
     }
 
-    public void setIsActive(int isActive) {
+    public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
 }

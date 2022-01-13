@@ -23,9 +23,9 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private int isActive;
+    private Integer isActive;
 
-    public UserDetailsImpl(Long id, String name, String username, String email, String password, int isActive) {
+    public UserDetailsImpl(Long id, String name, String username, String email, String password, Integer isActive) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -52,7 +52,7 @@ public class UserDetailsImpl implements UserDetails {
         return this.name;
     }
 
-    public int getIsActive() {
+    public Integer getIsActive() {
         return this.isActive;
     }
 

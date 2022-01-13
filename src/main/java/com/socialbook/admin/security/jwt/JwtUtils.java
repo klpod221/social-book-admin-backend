@@ -19,7 +19,7 @@ public class JwtUtils {
     private String jwtSecret;
 
     @Value("${socialbook.app.jwtExpirationMs}")
-    private int jwtExpirationMs;
+    private Integer jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
 
