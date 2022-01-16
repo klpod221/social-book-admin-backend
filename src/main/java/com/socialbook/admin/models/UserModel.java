@@ -54,6 +54,18 @@ public class UserModel {
         this.isActive = isActive;
     }
 
+    public UserModel(Long id, String firstName, String lastName, String email, String username, String password,
+            String createdAt, Integer isActive) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.isActive = isActive;
+    }
+
     public Long getId() {
         return this.id;
     }

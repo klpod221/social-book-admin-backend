@@ -27,7 +27,7 @@ public class UUID_handing {
     public static Long UUID_Generator() throws ParseException {
         Long UUID;
         UUID = timenow_nanotime() - created_nanotime();
-        return UUID << 19;
+        return UUID << 8;
     }
 
     // public static void main(String[] args) throws ParseException {

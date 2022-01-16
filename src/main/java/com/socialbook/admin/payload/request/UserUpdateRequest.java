@@ -13,8 +13,6 @@ public class UserUpdateRequest {
     @NotBlank
     private String username;
 
-    private String avatarUrl;
-
     public String getFirstName() {
         return this.firstName;
     }
@@ -46,13 +44,4 @@ public class UserUpdateRequest {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    public String getAvatarUrl() {
-        return this.avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
 }

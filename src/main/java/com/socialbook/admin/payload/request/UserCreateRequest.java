@@ -13,11 +13,6 @@ public class UserCreateRequest {
     @NotBlank
     private String username;
 
-    private String avatarUrl;
-
-    @NotBlank
-    private Integer isActive;
-
     public String getFirstName() {
         return this.firstName;
     }
@@ -49,21 +44,4 @@ public class UserCreateRequest {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    public String getAvatarUrl() {
-        return this.avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
-    public Integer getIsActive() {
-        return this.isActive;
-    }
-
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
-    }
-
 }

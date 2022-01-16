@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -97,18 +98,29 @@ public class UserController {
                 request.getEmail(),
                 request.getUsername(),
                 encoder.encode(defaultPassword),
-                request.getAvatarUrl(),
                 timestamp,
-                request.getIsActive());
+                1);
 
         userRepository.save(user);
 
-        return ResponseEntity.ok().body(new MessageResponse("User created successfully!"));
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping("/users/update_account/{id}")
-    public ResponseEntity<UserModel> updateUser(@PathVariable("id") Long id, @RequestBody UserUpdateRequest request) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserUpdateRequest request) {
         Optional<UserModel> user = userRepository.findById(id);
+
+        if (userRepository.existsByUsername(request.getUsername())) {
+            UserModel userExistByUserName = userRepository.findByUsername(request.getUsername());
+            if (userExistByUserName.getId() != id)
+                return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            UserModel userExistByEmail = userRepository.findByEmail(request.getEmail());
+            if (userExistByEmail.getId() != id)
+                return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        }
 
         if (user.isPresent()) {
             UserModel _user = user.get();
@@ -116,15 +128,14 @@ public class UserController {
             _user.setLastName(request.getLastName());
             _user.setEmail(request.getEmail());
             _user.setUsername(request.getUsername());
-            _user.setAvatarUrl(request.getAvatarUrl()); //
             return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/users/set_default_password/{id}")
-    public ResponseEntity<UserModel> setDefaultPassword(@PathVariable("id") Long id) throws ParseException {
+    @PatchMapping("/users/set_default_password")
+    public ResponseEntity<UserModel> setDefaultPassword(@RequestBody Long id) throws ParseException {
         Optional<UserModel> user = userRepository.findById(id);
 
         if (user.isPresent()) {
@@ -136,9 +147,8 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/users/change_active_status/{id}")
-    public ResponseEntity<UserModel> changeActiveStatus(@PathVariable("id") Long id) {
-
+    @PatchMapping("/users/change_active_status")
+    public ResponseEntity<UserModel> changeActiveStatus(@RequestBody Long id) {
         Optional<UserModel> user = userRepository.findById(id);
 
         if (user.isPresent()) {
