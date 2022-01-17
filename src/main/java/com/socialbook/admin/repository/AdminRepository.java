@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.socialbook.admin.models.AdminModel;
 
 @Repository
-public interface UserRepository extends JpaRepository<AdminModel, Long> {
+public interface AdminRepository extends JpaRepository<AdminModel, Long> {
     Optional<AdminModel> findByUsername(String username);
 }

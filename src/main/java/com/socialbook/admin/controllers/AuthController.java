@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.socialbook.admin.payload.request.LoginRequest;
 import com.socialbook.admin.payload.response.JwtResponse;
 // import com.socialbook.admin.payload.response.MessageResponse;
-import com.socialbook.admin.repository.UserRepository;
+import com.socialbook.admin.repository.AdminRepository;
 import com.socialbook.admin.security.jwt.JwtUtils;
 import com.socialbook.admin.security.services.UserDetailsImpl;
 
@@ -30,7 +30,7 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+    AdminRepository adminRepository;
 
     @Autowired
     PasswordEncoder encoder;

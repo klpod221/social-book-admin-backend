@@ -8,11 +8,13 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.socialbook.admin.models.UserInfoModel;
 import com.socialbook.admin.models.UserModel;
 import com.socialbook.admin.payload.request.UserCreateRequest;
 import com.socialbook.admin.payload.request.UserUpdateRequest;
 import com.socialbook.admin.payload.response.MessageResponse;
 import com.socialbook.admin.repository.UserAccountRepository;
+import com.socialbook.admin.repository.UserInfoRepository;
 import com.socialbook.admin.services.UUID_handing;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class UserController {
 
     @Autowired
     UserAccountRepository userRepository;
+
+    @Autowired
+    UserInfoRepository userInfoRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -76,6 +81,16 @@ public class UserController {
 
         if (userData.isPresent())
             return new ResponseEntity<>(userData.get(), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/users/user_info/{id}")
+    public ResponseEntity<UserInfoModel> getUserInfoById(@PathVariable("id") Long id) {
+        Optional<UserInfoModel> userInfoData = userInfoRepository.findById(id);
+
+        if (userInfoData.isPresent())
+            return new ResponseEntity<>(userInfoData.get(), HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
