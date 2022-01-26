@@ -28,9 +28,6 @@ public class UserModel {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "avatar_url")
-    private String avatarUrl;
-
     @Column(name = "created_at")
     private String createdAt;
 
@@ -39,19 +36,6 @@ public class UserModel {
     private Integer isActive;
 
     public UserModel() {
-    }
-
-    public UserModel(Long id, String firstName, String lastName, String email, String username, String password,
-            String avatarUrl, String createdAt, Integer isActive) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.avatarUrl = avatarUrl;
-        this.createdAt = createdAt;
-        this.isActive = isActive;
     }
 
     public UserModel(Long id, String firstName, String lastName, String email, String username, String password,
@@ -114,14 +98,6 @@ public class UserModel {
         this.password = password;
     }
 
-    public String getAvatarUrl() {
-        return this.avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
     public String getCreatedAt() {
         return this.createdAt;
     }
@@ -168,11 +144,6 @@ public class UserModel {
         return this;
     }
 
-    public UserModel avatarUrl(String avatarUrl) {
-        setAvatarUrl(avatarUrl);
-        return this;
-    }
-
     public UserModel createdAt(String createdAt) {
         setCreatedAt(createdAt);
         return this;
@@ -191,7 +162,6 @@ public class UserModel {
                 ", lastName='" + getLastName() + "'" +
                 ", email='" + getEmail() + "'" +
                 ", username='" + getUsername() + "'" +
-                ", avatarUrl='" + getAvatarUrl() + "'" +
                 ", createdAt='" + getCreatedAt() + "'" +
                 ", isActive='" + getIsActive() + "'" +
                 "}";

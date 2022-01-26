@@ -10,6 +10,9 @@ public class UserInfoModel {
     @Id
     private Long user_id;
 
+    @Column(name = "avatar_url")
+    private String avatar_url;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -34,9 +37,10 @@ public class UserInfoModel {
     public UserInfoModel() {
     }
 
-    public UserInfoModel(Long user_id, String phoneNumber, Integer gender, Date dateOfBirth, String studyAt,
-            String workingAt, String address, String relationshipStatus) {
+    public UserInfoModel(Long user_id, String avatar_url, String phoneNumber, Integer gender, Date dateOfBirth,
+            String studyAt, String workingAt, String address, String relationshipStatus) {
         this.user_id = user_id;
+        this.avatar_url = avatar_url;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
@@ -162,6 +166,14 @@ public class UserInfoModel {
                 ", address='" + getAddress() + "'" +
                 ", relationshipStatus='" + getRelationshipStatus() + "'" +
                 "}";
+    }
+
+    public String getAvatar_url() {
+        return this.avatar_url;
+    }
+
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
     }
 
 }
